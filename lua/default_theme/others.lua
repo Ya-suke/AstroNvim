@@ -140,7 +140,7 @@ local others = {
   VimwikiLink = { fg = C.cyan, bg = C.none },
   VimwikiHeaderChar = { fg = C.grey, bg = C.none },
   VimwikiHR = { fg = C.yellow, bg = C.none },
-  VimwikiList = { fg = C.orange, bg = C.orange },
+  VimwikiList = { fg = C.orange, bg = C.none },
   VimwikiTag = { fg = C.orange, bg = C.orange },
   VimwikiMarkers = { fg = C.grey, bg = C.none },
   VimwikiHeader1 = { fg = C.orange, bg = C.none, bold = true },
