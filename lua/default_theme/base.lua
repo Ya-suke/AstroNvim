@@ -36,7 +36,7 @@ local base = {
   CursorLineNr = { fg = C.fg, bg = C.none },
   Conceal = { fg = C.grey, bg = C.none },
   CursorColumn = { fg = C.none, bg = C.grey_4 },
-  CursorLine = { fg = C.none, bg = C.grey_8 },
+  CursorLine = { fg = C.none, bg = C.none },
   Directory = { fg = C.blue, bg = C.none },
   DiffAdd = { fg = C.grey_3, bg = C.green },
   DiffChange = { fg = C.yellow, bg = C.none },
