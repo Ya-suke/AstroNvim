@@ -29,7 +29,7 @@ local lsp = {
   DiagnosticTruncateLine = { fg = C.white_1, style = "bold" },
   LspSagaCodeActionTitle = { fg = C.yellow, style = "bold" },
   LspSagaCodeActionContent = { fg = C.green, style = "bold" },
-  LspFloatWinNormal = { fg = C.fg, bg = C.black_1 },
+  LspFloatWinNormal = { fg = C.fg, bg = C.none },
   LspDiagnosticsFloatingError = { fg = C.red_1 },
   LspDiagnosticsFloatingWarn = { fg = C.orange_1 },
   LspDiagnosticsFloatingInfor = { fg = C.white_2 },
