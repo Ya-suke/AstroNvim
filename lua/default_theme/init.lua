@@ -5,6 +5,7 @@ end
 vim.o.background = "dark"
 vim.o.termguicolors = true
 vim.g.colors_name = "default_theme"
+vim.cmd[[au VimEnter * highlight Normal guibg=none]]
 
 local user_plugin_opts = require("core.utils").user_plugin_opts
 
