@@ -64,4 +64,8 @@ end
 
 create_command("AstroUpdate", require("core.utils").update, {})
 
+vim.cmd [[
+  command! AstroInfo lua require('core.info').toggle_popup(vim.bo.filetype)
+]]
+
 return M
