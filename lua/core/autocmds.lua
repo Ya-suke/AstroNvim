@@ -68,4 +68,8 @@ vim.cmd [[
   command! AstroInfo lua require('core.info').toggle_popup(vim.bo.filetype)
 ]]
 
+vim.cmd [[
+  command! AstroInfo lua require('core.info').toggle_popup(vim.bo.filetype)
+]]
+
 return M
