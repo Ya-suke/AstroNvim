@@ -215,6 +215,9 @@ if not utils.is_available "which-key.nvim" then
     map("n", "<leader>lD", function()
       require("telescope.builtin").diagnostics()
     end)
+    map("n", "<leader>fp", function()
+      require("telescope.builtin").projects()
+    end)
   end
 
   -- Comment

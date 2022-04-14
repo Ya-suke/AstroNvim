@@ -295,6 +295,12 @@ if utils.is_available "telescope.nvim" then
     end,
     "Find Words",
   }
+  mappings.f.p = {
+    function()
+      require("telescope.builtin").projects()
+    end,
+    "Recent Projects",
+  }
 
   init_table "l"
   mappings.l.s = {
