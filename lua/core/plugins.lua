@@ -259,7 +259,6 @@ local astro_plugins = {
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
-    module = "telescope",
     config = function()
       require("configs.telescope").config()
     end,
