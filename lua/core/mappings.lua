@@ -142,6 +142,7 @@ if not utils.is_available "which-key.nvim" then
     map("n", "<leader>ls", "<cmd>Telescope lsp_document_symbols<CR>", opts)
     map("n", "<leader>lR", "<cmd>Telescope lsp_references<CR>", opts)
     map("n", "<leader>lD", "<cmd>Telescope diagnostics<CR>", opts)
+    map("n", "<leader>fp", "<cmd>Telescope projects<CR>", opts)
   end
 
   -- Comment

@@ -134,6 +134,7 @@ if utils.is_available "telescope.nvim" then
   mappings.f.h = { "<cmd>Telescope help_tags<CR>", "Find Help" }
   mappings.f.m = { "<cmd>Telescope marks<CR>", "Find Marks" }
   mappings.f.o = { "<cmd>Telescope oldfiles<CR>", "Find Old Files" }
+  mappings.f.p = { "<cmd>Telescope projects<CR>", "Recent Projects" }
   mappings.f.w = { "<cmd>Telescope live_grep<CR>", "Find Words" }
 
   init_table "l"
