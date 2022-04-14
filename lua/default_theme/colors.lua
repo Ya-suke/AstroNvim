@@ -1,8 +1,13 @@
 local colors = {
   none = "NONE",
   fg = "#abb2bf",
+<<<<<<< HEAD
 -- bg = "#1e222a",
   bg = "NONE",
+=======
+  bg = "#1e222a",
+  bg_1 = "#303742",
+>>>>>>> da8b4e494c8151522fab386c1dd41f4206949fbc
   black = "#181a1f",
   black_1 = "#1f1f25",
   green = "#98c379",
@@ -14,6 +19,7 @@ local colors = {
   blue = "#61afef",
   blue_1 = "#40d9ff",
   blue_2 = "#1b1f27",
+  blue_3 = "#8094B4",
   orange = "#d19a66",
   orange_1 = "#ff9640",
   orange_2 = "#ff8800",
@@ -39,6 +45,7 @@ local colors = {
   gold = "#ffcc00",
   cyan = "#56b6c2",
   purple = "#c678dd",
+  purple_1 = "#a9a1e1",
 }
 
 return require("core.utils").user_plugin_opts("default_theme.colors", colors)

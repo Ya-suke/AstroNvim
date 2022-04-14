@@ -1,17 +1,47 @@
 local M = {}
 
+local supported_configs = {
+  vim.fn.stdpath "config",
+  vim.fn.stdpath "config" .. "/../astrovim",
+}
+
 local g = vim.g
 
+local function file_not_empty(path)
+  return vim.fn.empty(vim.fn.glob(path)) == 0
+end
+
+local function load_module_file(module)
+  local found_module = nil
+  for _, config_path in ipairs(supported_configs) do
+    local module_path = config_path .. "/lua/" .. module:gsub("%.", "/") .. ".lua"
+    if file_not_empty(module_path) then
+      found_module = module_path
+    end
+  end
+  if found_module then
+    local status_ok, loaded_module = pcall(require, module)
+    if status_ok then
+      found_module = loaded_module
+    else
+      vim.notify("Error loading " .. found_module, "error", M.base_notification)
+    end
+  end
+  return found_module
+end
+
 local function load_user_settings()
-  local status_ok, user_settings = pcall(require, "user")
+  local user_settings = load_module_file "user.init"
   local defaults = require "core.defaults"
-  if status_ok and type(user_settings) == "table" then
+  if user_settings ~= nil and type(user_settings) == "table" then
     defaults = vim.tbl_deep_extend("force", defaults, user_settings)
   end
   return defaults
 end
 
 local _user_settings = load_user_settings()
+
+local _user_terminals = {}
 
 local function func_or_extend(overrides, default)
   if default == nil then
@@ -36,8 +66,8 @@ local function user_setting_table(module)
 end
 
 local function load_options(module, default)
-  local status_ok, user_settings = pcall(require, "user." .. module)
-  if not status_ok then
+  local user_settings = load_module_file("user." .. module)
+  if user_settings == nil then
     user_settings = user_setting_table(module)
   end
   if user_settings ~= nil then
@@ -128,13 +158,11 @@ function M.list_registered_linters(filetype)
   return registered_providers[formatter_method] or {}
 end
 
-function M.add_cmp_source(source)
-  local cmp_ok, cmp = pcall(require, "cmp")
-  if cmp_ok then
-    local config = cmp.get_config()
-    table.insert(config.sources, { name = source })
-    cmp.setup(config)
+function M.toggle_term_cmd(cmd)
+  if _user_terminals[cmd] == nil then
+    _user_terminals[cmd] = require("toggleterm.terminal").Terminal:new { cmd = cmd, hidden = true }
   end
+  _user_terminals[cmd]:toggle()
 end
 
 function M.label_plugins(plugins)
@@ -143,6 +171,10 @@ function M.label_plugins(plugins)
     labelled[plugin[1]] = plugin
   end
   return labelled
+end
+
+function M.is_available(plugin)
+  return packer_plugins ~= nil and packer_plugins[plugin] ~= nil
 end
 
 function M.update()
