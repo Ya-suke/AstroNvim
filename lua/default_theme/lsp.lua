@@ -1,14 +1,14 @@
-local user_settings = require("core.utils").user_plugin_opts("default_theme", {})
+local utils = require "default_theme.utils"
 
 local lsp = {
-  DiagnosticError = { fg = C.red_1, style = user_settings.diagnostics_style },
-  DiagnosticWarn = { fg = C.orange_1, style = user_settings.diagnostics_style },
-  DiagnosticInfo = { fg = C.white_2, style = user_settings.diagnostics_style },
-  DiagnosticHint = { fg = C.yellow_1, style = user_settings.diagnostics_style },
-  DiagnosticUnderlineError = { style = "undercurl", sp = C.red_2 },
-  DiagnosticUnderlineWarn = { style = "undercurl", sp = C.red_2 },
-  DiagnosticUnderlineInfo = { style = "undercurl", sp = C.red_2 },
-  DiagnosticUnderlineHint = { style = "undercurl", sp = C.red_2 },
+  DiagnosticError = utils.parse_diagnostic_style { fg = C.red_1 },
+  DiagnosticWarn = utils.parse_diagnostic_style { fg = C.orange_1 },
+  DiagnosticInfo = utils.parse_diagnostic_style { fg = C.white_2 },
+  DiagnosticHint = utils.parse_diagnostic_style { fg = C.yellow_1 },
+  DiagnosticUnderlineError = { sp = C.red_2, undercurl = true },
+  DiagnosticUnderlineWarn = { sp = C.red_2, undercurl = true },
+  DiagnosticUnderlineInfo = { sp = C.red_2, undercurl = true },
+  DiagnosticUnderlineHint = { sp = C.red_2, undercurl = true },
   LspReferenceText = { fg = C.none, bg = C.grey_5 },
   LspReferenceRead = { fg = C.none, bg = C.grey_5 },
   LspReferenceWrite = { fg = C.none, bg = C.grey_5 },
@@ -35,8 +35,8 @@ local lsp = {
   LspDiagnosticsFloatingInfor = { fg = C.white_2 },
   LspDiagnosticsFloatingHint = { fg = C.yellow_1 },
   LspSagaDiagnosticHeader = { fg = C.yellow },
-  LspSagaBorderTitle = { fg = C.yellow, style = "bold" },
-  DiagnosticInformation = { fg = C.yellow, style = "bold" },
+  LspSagaBorderTitle = { fg = C.yellow, bold = true },
+  DiagnosticInformation = { fg = C.yellow, bold = true },
 }
 
 return lsp
