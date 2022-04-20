@@ -62,7 +62,7 @@ if utils.is_available "dashboard-nvim" then
   })
 end
 
-create_command("AstroUpdate", require("core.utils").update, {})
+create_command("AstroUpdate", require("core.utils").update, { desc = "Update AstroNvim" })
 
 vim.cmd [[
   command! AstroInfo lua require('core.info').toggle_popup(vim.bo.filetype)
