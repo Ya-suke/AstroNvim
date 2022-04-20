@@ -296,9 +296,7 @@ if utils.is_available "telescope.nvim" then
     "Find Words",
   }
   mappings.f.p = {
-    function()
-      require("telescope.builtin").projects()
-    end,
+    "<cmd>Telescope projects<CR>",
     "Recent Projects",
   }
 
