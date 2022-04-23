@@ -33,7 +33,7 @@ function M.config()
     c = { description = { "   Recent Projects           SPC f p" }, command = "Telescope projects" },
     d = { description = { "   Find Word                 SPC f w" }, command = "Telescope live_grep" },
     e = { description = { "   New File                  SPC f n" }, command = "DashboardNewFile" },
-    f = { description = { "   Bookmarks                 SPC b m" }, command = "Telescope marks" },
+    f = { description = { "   Bookmarks                 SPC f m" }, command = "Telescope marks" },
     g = { description = { "   Last Session              SPC s l" }, command = "SessionLoad" },
   }
 
