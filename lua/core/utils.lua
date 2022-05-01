@@ -96,11 +96,13 @@ function M.bootstrap()
 end
 
 function M.disabled_builtins()
+  g.load_black = false
   g.loaded_2html_plugin = false
   g.loaded_getscript = false
   g.loaded_getscriptPlugin = false
   g.loaded_gzip = false
   g.loaded_logipat = false
+  g.loaded_matchit = true
   g.loaded_netrwFileHandlers = false
   g.loaded_netrwPlugin = false
   g.loaded_netrwSettngs = false
@@ -158,6 +160,18 @@ function M.list_registered_linters(filetype)
   return registered_providers[formatter_method] or {}
 end
 
+function M.url_opener_cmd()
+  local cmd = function()
+    vim.notify("gx is not supported on this OS!", "error", M.base_notification)
+  end
+  if vim.fn.has "mac" == 1 then
+    cmd = '<Cmd>call jobstart(["open", expand("<cfile>")], {"detach": v:true})<CR>'
+  elseif vim.fn.has "unix" == 1 then
+    cmd = '<Cmd>call jobstart(["xdg-open", expand("<cfile>")], {"detach": v:true})<CR>'
+  end
+  return cmd
+end
+
 -- term_details can be either a string for just a command or
 -- a complete table to provide full access to configuration when calling Terminal:new()
 function M.toggle_term_cmd(term_details)
@@ -202,8 +216,38 @@ function M.label_plugins(plugins)
   return labelled
 end
 
+function M.defer_plugin(plugin, timeout)
+  vim.defer_fn(function()
+    require("packer").loader(plugin)
+  end, timeout or 0)
+end
+
 function M.is_available(plugin)
   return packer_plugins ~= nil and packer_plugins[plugin] ~= nil
+end
+
+function M.delete_url_match()
+  for _, match in ipairs(vim.fn.getmatches()) do
+    if match.group == "HighlightURL" then
+      vim.fn.matchdelete(match.id)
+    end
+  end
+end
+
+function M.set_url_match()
+  M.delete_url_match()
+  if vim.g.highlighturl_enabled then
+    vim.fn.matchadd(
+      "HighlightURL",
+      "\\v\\c%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)%([&:#*@~%_\\-=?!+;/0-9a-z]+%(%([.;/?]|[.][.]+)[&:#*@~%_\\-=?!+/0-9a-z]+|:\\d+|,%(%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)@![0-9a-z]+))*|\\([&:#*@~%_\\-=?!+;/.0-9a-z]*\\)|\\[[&:#*@~%_\\-=?!+;/.0-9a-z]*\\]|\\{%([&:#*@~%_\\-=?!+;/.0-9a-z]*|\\{[&:#*@~%_\\-=?!+;/.0-9a-z]*})\\})+",
+      15
+    )
+  end
+end
+
+function M.toggle_url_match()
+  vim.g.highlighturl_enabled = not vim.g.highlighturl_enabled
+  M.set_url_match()
 end
 
 function M.update()

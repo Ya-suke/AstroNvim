@@ -52,21 +52,7 @@ else
   map("n", "<S-h>", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
 end
 
--- Move text up and down
-map("n", "<A-j>", "<Esc><cmd>m .+1<CR>==gi", { desc = "Move text down" })
-map("n", "<A-k>", "<Esc><cmd>m .-2<CR>==gi", { desc = "Move text up" })
-
 -- LSP
-map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration of current symbol" })
-map("n", "gd", vim.lsp.buf.definition, { desc = "Show the definition of current symbol" })
-map("n", "gI", vim.lsp.buf.implementation, { desc = "Go to implementation of current symbol" })
-map("n", "gr", vim.lsp.buf.references, { desc = "References of current symbol" })
-map("n", "go", vim.diagnostic.open_float, { desc = "Hover diagnostics" })
-map("n", "gl", vim.diagnostic.open_float, { desc = "Hover diagnostics" })
-map("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
-map("n", "gk", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
-map("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
-map("n", "gj", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
 map("n", "K", vim.lsp.buf.hover, { desc = "Hover symbol details" })
 -- <leader>rn: legacy binding here for backwards compatibility but not in which-key (see <leader>lr)
 map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename current symbol" })
@@ -82,6 +68,9 @@ if utils.is_available "nvim-toggleterm.lua" then
   map("n", "<C-\\>", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
 end
 
+-- disable Ex mode:
+map("n", "Q", "<Nop>")
+
 -- Normal Leader Mappings --
 -- NOTICE: if changed, update configs/which-key-register.lua
 -- Allows easy user modifications when just overriding which-key
@@ -91,6 +80,7 @@ if not utils.is_available "which-key.nvim" then
   map("n", "<leader>w", "<cmd>w<CR>", { desc = "Write" })
   map("n", "<leader>q", "<cmd>q<CR>", { desc = "Quite" })
   map("n", "<leader>h", "<cmd>nohlsearch<CR>", { desc = "Disable search highlight" })
+  map("n", "<leader>u", require("core.utils").toggle_url_match, { desc = "Toggle URL Highlights" })
 
   if utils.is_available "vim-bbye" then
     map("n", "<leader>c", "<cmd>Bdelete!<CR>", { desc = "Delete buffer" })
@@ -110,6 +100,17 @@ if not utils.is_available "which-key.nvim" then
   map("n", "<leader>la", vim.lsp.buf.code_action, { desc = "LSP code action" })
   map("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename current symbol" })
   map("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Hover diagnostics" })
+  map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration of current symbol" })
+  map("n", "gd", vim.lsp.buf.definition, { desc = "Show the definition of current symbol" })
+  map("n", "gI", vim.lsp.buf.implementation, { desc = "Go to implementation of current symbol" })
+  map("n", "gr", vim.lsp.buf.references, { desc = "References of current symbol" })
+  map("n", "go", vim.diagnostic.open_float, { desc = "Hover diagnostics" })
+  map("n", "gl", vim.diagnostic.open_float, { desc = "Hover diagnostics" })
+  map("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+  map("n", "gk", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+  map("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
+  map("n", "gj", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
+  map("n", "gx", utils.url_opener_cmd(), { desc = "Open the file under cursor with system app" })
 
   -- NeoTree
   if utils.is_available "neo-tree.nvim" then
@@ -253,8 +254,8 @@ if not utils.is_available "which-key.nvim" then
   end
 
   -- SymbolsOutline
-  if utils.is_available "symbols-outline.nvim" then
-    map("n", "<leader>lS", "<cmd>SymbolsOutline<CR>", { desc = "Symbols outline" })
+  if utils.is_available "aerial.nvim" then
+    map("n", "<leader>lS", "<cmd>AerialToggle<CR>", { desc = "Symbols outline" })
   end
 end
 
@@ -276,16 +277,6 @@ if utils.is_available "Comment.nvim" then
     { desc = "Toggle comment line" }
   )
 end
-
--- Visual Block --
--- Move text up and down
-map("x", "J", "<cmd>move '>+1<CR>gv-gv", { desc = "Move text down" })
-map("x", "K", "<cmd>move '<-2<CR>gv-gv", { desc = "Move text up" })
-map("x", "<A-j>", "<cmd>move '>+1<CR>gv-gv", { desc = "Move text down" })
-map("x", "<A-k>", "<cmd>move '<-2<CR>gv-gv", { desc = "Move text up" })
-
--- disable Ex mode:
-map("n", "Q", "<Nop>")
 
 function _G.set_terminal_keymaps()
   vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], { desc = "Terminal normal mode" })
