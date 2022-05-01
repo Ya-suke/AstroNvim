@@ -305,8 +305,10 @@ if status_ok then
       end,
       "Find Words",
     }
-    mappings.f.p = {
-      "<cmd>Telescope projects<CR>",
+    mappings.n["<leader>"].f.p = {
+      function()
+        require("telescope").extensions.projects.projects{}
+      end,
       "Recent Projects",
     }
 
