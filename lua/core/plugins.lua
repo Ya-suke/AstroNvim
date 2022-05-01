@@ -82,11 +82,13 @@ if packer_status_ok then
     -- Better buffer closing
     {
       "moll/vim-bbye",
+      cmd = { "Bdelete", "Bwipeout" },
     },
 
     -- File explorer
     {
       "nvim-neo-tree/neo-tree.nvim",
+      branch = "v2.x",
       module = "neo-tree",
       cmd = "Neotree",
       requires = "MunifTanjim/nui.nvim",
@@ -205,40 +207,36 @@ if packer_status_ok then
       end,
     },
 
-    -- LSP manager
-    {
-      "williamboman/nvim-lsp-installer",
-      module = "nvim-lsp-installer",
-      cmd = {
-        "LspInstall",
-        "LspInstallInfo",
-        "LspPrintInstalled",
-        "LspRestart",
-        "LspStart",
-        "LspStop",
-        "LspUninstall",
-        "LspUninstallAll",
-      },
-    },
-
     -- Built-in LSP
     {
       "neovim/nvim-lspconfig",
-      tag = "v0.1.3",
-      event = "BufWinEnter",
+      module = "lspconfig",
+      opt = true,
+      setup = function()
+        require("core.utils").defer_plugin "nvim-lspconfig"
+      end,
+    },
+
+    -- LSP manager
+    {
+      "williamboman/nvim-lsp-installer",
+      after = "nvim-lspconfig",
       config = function()
+        require("configs.nvim-lsp-installer").config()
         require "configs.lsp"
       end,
     },
 
     -- LSP symbols
     {
-      "simrat39/symbols-outline.nvim",
-      cmd = "SymbolsOutline",
+      "stevearc/aerial.nvim",
+      opt = true,
       setup = function()
-        require("configs.symbols-outline").setup()
+        require("core.utils").defer_plugin "aerial.nvim"
       end,
-      disable = not config.enabled.symbols_outline,
+      config = function()
+        require("configs.aerial").config()
+      end,
     },
 
     -- Formatting and linting
@@ -276,7 +274,10 @@ if packer_status_ok then
     -- Git integration
     {
       "lewis6991/gitsigns.nvim",
-      event = { "BufRead", "BufNewFile" },
+      opt = true,
+      setup = function()
+        require("core.utils").defer_plugin "gitsigns.nvim"
+      end,
       config = function()
         require("configs.gitsigns").config()
       end,
@@ -327,7 +328,7 @@ if packer_status_ok then
       "numToStr/Comment.nvim",
       event = { "BufRead", "BufNewFile" },
       config = function()
-        require("configs.comment").config()
+        require("configs.Comment").config()
       end,
       disable = not config.enabled.comment,
     },

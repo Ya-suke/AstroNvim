@@ -6,14 +6,6 @@ local cmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 local create_command = vim.api.nvim_create_user_command
 
-augroup("packer_user_config", {})
-cmd("BufWritePost", {
-  desc = "Auto Compile plugins.lua file",
-  group = "packer_user_config",
-  command = "source <afile> | PackerCompile",
-  pattern = "plugins.lua",
-})
-
 augroup("cursor_off", {})
 cmd("WinLeave", {
   desc = "No cursorline",
@@ -24,6 +16,14 @@ cmd("WinEnter", {
   desc = "No cursorline",
   group = "cursor_off",
   command = "set cursorline",
+})
+
+augroup("highlighturl", {})
+cmd({ "VimEnter", "FileType", "BufEnter", "WinEnter" }, {
+  desc = "URL Highlighting",
+  group = "highlighturl",
+  pattern = "*",
+  callback = require("core.utils").set_url_match,
 })
 
 if utils.is_available "dashboard-nvim" then
@@ -64,13 +64,7 @@ end
 
 create_command("AstroUpdate", require("core.utils").update, { desc = "Update AstroNvim" })
 
-vim.cmd [[
-  command! AstroInfo lua require('core.info').toggle_popup(vim.bo.filetype)
-]]
-
-vim.cmd [[
-  command! AstroInfo lua require('core.info').toggle_popup(vim.bo.filetype)
-]]
+create_command("ToggleHighlightURL", require("core.utils").toggle_url_match, { desc = "Toggle URL Highlights" })
 
 vim.cmd [[
   command! AstroInfo lua require('core.info').toggle_popup(vim.bo.filetype)

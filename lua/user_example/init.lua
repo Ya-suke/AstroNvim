@@ -60,21 +60,36 @@ local config = {
     treesitter = {
       ensure_installed = { "lua" },
     },
+    ["nvim-lsp-installer"] = {
+      ensure_installed = { "sumneko_lua" },
+    },
     packer = {
       compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
     },
   },
 
-  -- Add paths for including more VS Code style snippets in luasnip
+  -- LuaSnip Options
   luasnip = {
+    -- Add paths for including more VS Code style snippets in luasnip
     vscode_snippet_paths = {},
+    -- Extend filetypes
+    filetype_extend = {
+      javascript = { "javascriptreact" },
+    },
   },
 
   -- Modify which-key registration
   ["which-key"] = {
-    -- Add bindings to the normal mode <leader> mappings
-    register_n_leader = {
-      -- ["N"] = { "<cmd>tabnew<cr>", "New Buffer" },
+    -- Add bindings
+    register_mappings = {
+      -- first key is the mode, n == normal mode
+      n = {
+        -- second key is the prefix, <leader> prefixes
+        ["<leader>"] = {
+          -- which-key registration table for normal mode, leader prefix
+          -- ["N"] = { "<cmd>tabnew<cr>", "New Buffer" },
+        },
+      },
     },
   },
 
@@ -95,13 +110,17 @@ local config = {
 
   -- Extend LSP configuration
   lsp = {
+    -- enable servers that you already have installed without lsp-installer
+    servers = {
+      -- "pyright"
+    },
     -- add to the server on_attach function
     -- on_attach = function(client, bufnr)
     -- end,
 
     -- override the lsp installer server-registration function
     -- server_registration = function(server, opts)
-    --   server:setup(opts)
+    --   require("lspconfig")[server.name].setup(opts)
     -- end
 
     -- Add overrides for LSP server settings, the keys are the name of the server
