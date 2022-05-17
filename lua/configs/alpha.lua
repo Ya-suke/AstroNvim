@@ -24,7 +24,7 @@ function M.config()
           }, false),
           opts = { position = "center", hl = "DashboardHeader" },
         },
-        { type = "padding", val = 5 },
+        { type = "padding", val = 2 },
         {
           type = "group",
           val = {
