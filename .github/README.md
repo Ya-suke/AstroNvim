@@ -24,26 +24,18 @@
 AstroNvim is an aesthetic and feature-rich neovim config that is extensible and easy to use with a great set of plugins
 </p>
 
-**REBRANDING NOTICE:** AstroVim will now be known as AstroNvim to clear up any confusion surrounding this being a Neovim configuration vs a Vim configuration. If you have used AstroNvim before the rebranding please run the following command to update your installation repo:
-
-```sh
-git -C ~/.config/nvim remote set-url origin https://github.com/AstroNvim/AstroNvim.git
-```
-
-> **Pre-v1.0 Notice:** If you were using AstroVim before the v1.0 release, please see the updated documentation because there were breaking changes.
-
 ## 🌟 Preview
 
-![Preview1](./screenshots/preview1.png)
-![Preview2](./screenshots/preview2.png)
-![Preview33](./screenshots/preview3.png)
+![Preview1](https://github.com/AstroNvim/astronvim.github.io/raw/main/static/img/dashboard.png)
+![Preview2](https://github.com/AstroNvim/astronvim.github.io/raw/main/static/img/overview.png)
+![Preview33](https://github.com/AstroNvim/astronvim.github.io/raw/main/static/img/lsp_hover.png)
 
 ## ✨ Features
 
 - File explorer with [Neo-tree](https://github.com/nvim-neo-tree/neo-tree.nvim)
 - Autocompletion with [Cmp](https://github.com/hrsh7th/nvim-cmp)
 - Git integration with [Gitsigns](https://github.com/lewis6991/gitsigns.nvim)
-- Statusline with [Lualine](https://github.com/nvim-lualine/lualine.nvim)
+- Statusline with [Feline](https://github.com/feline-nvim/feline.nvim)
 - Terminal with [Toggleterm](https://github.com/akinsho/toggleterm.nvim)
 - Fuzzy finding with [Telescope](https://github.com/nvim-telescope/telescope.nvim)
 - Syntax highlighting with [Treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
