@@ -6,7 +6,7 @@ function M.config()
     local alpha_button = astronvim.alpha_button
     alpha.setup(astronvim.user_plugin_opts("plugins.alpha", {
       layout = {
-        { type = "padding", val = vim.fn.max { 2, vim.fn.floor(vim.fn.winheight(0) * 0.2) } },
+        { type = "padding", val = vim.fn.max { 2, vim.fn.floor(vim.fn.winheight(0) * 0.1) } },
         {
           type = "text",
           val = astronvim.user_plugin_opts("header", {
