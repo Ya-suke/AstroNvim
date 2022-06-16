@@ -24,11 +24,8 @@
 AstroNvim is an aesthetic and feature-rich neovim config that is extensible and easy to use with a great set of plugins
 </p>
 
-## 🌟 Preview
-
-![Preview1](https://github.com/AstroNvim/astronvim.github.io/raw/main/static/img/dashboard.png)
-![Preview2](https://github.com/AstroNvim/astronvim.github.io/raw/main/static/img/overview.png)
-![Preview33](https://github.com/AstroNvim/astronvim.github.io/raw/main/static/img/lsp_hover.png)
+## 🌟 Archived
+AstroNvim/AstroNvim has matured to a point where I do not feel the need to maintain my own branch anymore.
 
 ## ✨ Features
 
@@ -59,7 +56,7 @@ AstroNvim is an aesthetic and feature-rich neovim config that is extensible and 
 
 > Note if you are still on Neovim v0.6: You can still install the previous version of AstroNvim that supported. After cloning the repository run `git checkout nvim-0.6` to check out this version. This will no longer be receiving updates.
 
-## 🛠️ Installation
+## 🛠️ Installation (installs AstroNvim/astroNvim as this repo is archived)
 
 #### Make a backup of your current nvim folder
 
